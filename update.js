@@ -23,9 +23,20 @@ document.getElementById('updateFirmware').addEventListener('click', async () => 
     log('펌웨어 업데이트 버튼 클릭됨');
     try {
         const response = await fetch('https://api.github.com/repos/gnldud15/HEHP_web/releases/latest');
+        if (!response.ok) throw new Error('GitHub API 호출 실패');
+        
+        log('GitHub API 호출 성공');
         const data = await response.json();
+        
+        if (!data.assets || data.assets.length === 0) {
+            throw new Error('펌웨어 자산을 찾을 수 없음');
+        }
+
         const firmwareUrl = data.assets[0].browser_download_url;
         const firmwareResponse = await fetch(firmwareUrl);
+        if (!firmwareResponse.ok) throw new Error('펌웨어 다운로드 실패');
+        
+        log('펌웨어 다운로드 성공');
         const firmwareArrayBuffer = await firmwareResponse.arrayBuffer();
         const firmware = new Uint8Array(firmwareArrayBuffer);
         log('펌웨어 다운로드 완료, 플래싱 시작');
