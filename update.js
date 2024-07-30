@@ -28,6 +28,9 @@ document.getElementById('updateFirmware').addEventListener('click', async () => 
         log('GitHub API 호출 성공');
         const data = await response.json();
         
+        // 응답 데이터 로그 출력
+        log('GitHub API 응답 데이터: ' + JSON.stringify(data));
+
         if (!data.assets || data.assets.length === 0) {
             throw new Error('펌웨어 자산을 찾을 수 없음');
         }
