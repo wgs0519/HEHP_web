@@ -6,6 +6,9 @@ const log = (message) => {
     logElement.textContent += message + '\n';
 };
 
+// ESPLoader 클래스가 정의되어 있는지 확인
+console.log('ESPLoader:', typeof ESPLoader);
+
 document.getElementById('connect').addEventListener('click', () => {
     log('디바이스 연결 버튼 클릭됨');
     navigator.serial.requestPort()
