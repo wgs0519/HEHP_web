@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈 - HEHP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+
+        function addPost() {
+            var postContent = document.getElementById("postContent").value;
+            if (postContent === "") {
+                alert("글 내용을 입력하세요.");
+                return;
+            }
+            var postList = document.getElementById("postList");
+            var newPost = document.createElement("div");
+            newPost.className = "post";
+
+            var postText = document.createElement("p");
+            postText.innerText = postContent;
+
+            var commentList = document.createElement("div");
+            commentList.className = "commentList";
+
+            var commentInput = document.createElement("input");
+            commentInput.type = "text";
+            commentInput.placeholder = "댓글을 입력하세요";
+
+            var commentButton = document.createElement("button");
+            commentButton.innerText = "댓글 달기";
+            commentButton.onclick = function() {
+                var commentContent = commentInput.value;
+                if (commentContent === "") {
+                    alert("댓글 내용을 입력하세요.");
+                    return;
+                }
+                var newComment = document.createElement("p");
+                newComment.innerText = commentContent;
+                commentList.appendChild(newComment);
+                commentInput.value = "";
+            };
+
+            newPost.appendChild(postText);
+            newPost.appendChild(commentList);
+            newPost.appendChild(commentInput);
+            newPost.appendChild(commentButton);
+            postList.appendChild(newPost);
+
+            document.getElementById("postContent").value = "";
+        }
+    </script>
+    <style>
+        .post {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .commentList {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>홈</h1>
+        <section>
+            <h2>프로젝트 소개</h2>
+            <p>이 섹션에서는 프로젝트의 개요와 목적에 대해 설명합니다.</p>
+        </section>
+        <section>
+            <h2>가이드라인</h2>
+            <ul>
+                <li>
+                    <a href="#" onclick="toggleContent('esp32')">ESP32</a>
+                    <div id="esp32" style="display: none;">
+                        <h3>ESP32</h3>
+                        <p>ESP32 사용법에 대한 상세 설명입니다...</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleContent('raspberry-pi')">라즈베리파이</a>
+                    <div id="raspberry-pi" style="display: none;">
+                        <h3>라즈베리파이</h3>
+                        <p>라즈베리파이 사용법에 대한 상세 설명입니다...</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleContent('task1')">task1</a>
+                    <div id="task1" style="display: none;">
+                        <h3>Task 1</h3>
+                        <p>Task 1의 상세 설명입니다...</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleContent('task2')">task2</a>
+                    <div id="task2" style="display: none;">
+                        <h3>Task 2</h3>
+                        <p>Task 2의 상세 설명입니다...</p>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" onclick="toggleContent('task3')">task3</a>
+                    <div id="task3" style="display: none;">
+                        <h3>Task 3</h3>
+                        <p>Task 3의 상세 설명입니다...</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>자유게시판</h2>
+            <div>
+                <textarea id="postContent" placeholder="질문을 입력하세요" rows="4" cols="50"></textarea><br>
+                <button onclick="addPost()">글 올리기</button>
+            </div>
+            <div id="postList">
+                <!-- 게시글이 여기에 추가됩니다. -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+</body>
+</html>
