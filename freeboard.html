@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>펌웨어 업데이트 - HEHP</title>
+    <title>자유게시판 - HEHP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="write.js"></script>
     <style>
         /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #fff;
+            background-color: #f4f4f4;
             color: #333;
         }
 
@@ -19,7 +21,7 @@
         header {
             background-color: #007BFF;
             color: #fff;
-            padding: 10px 0;
+            padding: 20px 0;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -27,6 +29,7 @@
         header .logo {
             font-size: 28px;
             font-weight: bold;
+            margin: 0;
         }
 
         header .subtext {
@@ -49,27 +52,79 @@
             text-decoration: none;
             color: #fff;
             font-size: 16px;
+            transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
-            text-decoration: underline;
+            color: #FFD700;
         }
 
         /* Main Content Styles */
         main {
             padding: 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
-            text-align: center; /* 중앙 정렬 */
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        main h2 {
-            font-size: 27px;
-            margin-bottom: 20px;
+        main h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
             color: #007BFF;
-            text-align: center; /* 중앙 정렬 */
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Post Input Styles */
+        #postContent {
+            width: 100%;
+            max-width: 800px;
+            height: 200px;
+            font-size: 18px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: none;
+        }
+
+        #postContent:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        #postList {
+            margin-top: 20px;
+        }
+
+        /* Post Styles */
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .commentList {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 0 0 10px 10px;
         }
 
         /* Button Styles */
@@ -82,7 +137,6 @@
             border-radius: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 10px; /* 버튼 간격 */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
@@ -95,33 +149,12 @@
             background-color: #004494;
             transform: translateY(0);
         }
-
-        /* Log Styles */
-        pre {
-            background-color: #f4f4f4;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: left; /* 로그는 왼쪽 정렬 */
-            margin-top: 20px;
-            white-space: pre-wrap;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            margin-top: 40px;
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span style="color: #FFD700;">H</span>E<span style="color: #FFD700;">H</span>P
             <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
         </div>
         <nav>
@@ -136,17 +169,18 @@
         </nav>
     </header>
     <main>
-        <h2>최신 펌웨어 다운로드 및 업데이트</h2>
         <section>
-            <button id="connect">디바이스 연결</button>
-            <button id="updateFirmware" disabled>펌웨어 업데이트</button>
-            <pre id="log"></pre>
+            <div>
+                <textarea id="postContent" placeholder="질문을 입력하세요"></textarea><br>
+                <button onclick="addPost()">글 올리기</button>
+            </div>
+            <div id="postList">
+                <!-- 게시글이 여기에 추가됩니다. -->
+            </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
     </footer>
-    <script src="https://unpkg.com/esptool-js/bundle.js"></script>
-    <script src="update.js"></script>
 </body>
 </html>

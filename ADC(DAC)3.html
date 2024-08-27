@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADC(DAC) 3 문제  - HEHP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .code-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .description-box {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>ADC(DAC) 3 문제</h1>
+        <section>
+            <div class="code-display" id="ADC(DAC)3-code"></div>
+            <div class="description-box">
+                <h4>코드 설명:</h4>
+                <p>ESP32의 ADC를 사용하여 특정 전압 범위 내에서 일정 시간 동안 머무르면 Flag를 획득하는 예제입니다.</p>
+                <ul>
+                    <li><strong>analogRead(adcPin):</strong> ADC 핀에서 가변 저항의 값을 읽어옵니다.</li>
+                    <li><strong>analogWrite(ledPin, brightness):</strong> 목표 범위 내에 있을 때 LED의 밝기를 조절합니다.</li>
+                    <li>1초 동안 범위 내에 머물면 시리얼 모니터에 "Flag 획득!" 메시지를 출력하고 프로그램이 종료됩니다.</li>
+                </ul>
+                <figure>
+                    <img src="ADC, DAC task3.png" alt="사진 설명" style="width: 600px; height: auto;">
+                <figure>
+                <figure>
+                    <video id="myVideo1" width="500" height="auto" controls muted controlslist="nodownload nofullscreen noremoteplayback">
+                        <source src="ADC, DAC task3(2).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                
+                <figure>
+                    <video id="myVideo2" width="500" height="auto" controls muted controlslist="nodownload nofullscreen noremoteplayback">
+                        <source src="ADC, DAC task3(3).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </figure>
+                
+                <script>
+                    const video1 = document.getElementById('myVideo1');
+                    const video2 = document.getElementById('myVideo2');
+                    video1.volume = 0;
+                    video2.volume = 0;
+                
+                    // 사용자가 음량을 변경하지 못하도록 이벤트 리스너를 추가
+                    video1.addEventListener('volumechange', function() {
+                        if (video1.volume !== 0) {
+                            video1.volume = 0;
+                        }
+                    });
+                
+                    video2.addEventListener('volumechange', function() {
+                        if (video2.volume !== 0) {
+                            video2.volume = 0;
+                        }
+                    });
+                </script>
+            </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        async function loadCode(file, elementId) {
+            const response = await fetch(file);
+            const code = await response.text();
+            document.getElementById(elementId).textContent = code;
+        }
+
+        loadCode('ADC, DAC task3.ino', 'ADC(DAC)3-code');
+    </script>
+</body>
+</html>

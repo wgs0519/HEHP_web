@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT 1 문제 - HEHP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .code-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .description-box {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>MQTT 1 문제</h1>
+        <section>
+            <div class="code-display" id="mqtt1-code"></div>
+
+            <div class="description-box">
+                <h4>코드 설명:</h4>
+                                    <ul>
+                                        <li><strong>ssid와 password:</strong> ESP32가 MQTT 서버에 연결되어 메시지를 주고받는 기본적인 예제입니다.</li>
+                                        <li><strong>mqtt_server:</strong> MQTT 브로커의 주소로 여기서는 broker.mqtt-dashboard.com이라는 공개 MQTT 브로커를 사용합니다. 
+                                        메시지를 주고 받을때 발신지와 목적지를 이어주는 서버의 역할을 한다.</li>
+                                        <li><strong>PubSubClient client(espClient):</strong> MQTT 클라이언트를 설정하며, espClient를 통해 네트워크 연결을 처리하고 이를 이용하기 위해서는 Arduino의 PubSubClient 라이브러리를 설치할 필요가 있다.</li>
+                                        <li><strong>MQTT callback 함수:</strong> 특정 토픽에서 수신된 메시지(payload)를 처리하며 수신된 메시지를 시리얼 모니터에 출력한다.</li>
+                                        <li><strong>MQTT reconnect 함수:</strong> 이 함수는 MQTT 브로커에 연결을 시도하며 연결이 성공하면 특정 토픽(test/esp32/input)을 구독합니다.</li>
+                                        <li>2초마다 "hello world" 메시지를 생성하여 MQTT 브로커에 발행하여 지속적으로 연결 상황을 확인한다.</li>
+                                        <li>이를 위해 스마트폰에서 MyMQTT이라는 어플을 설치하여 스마트폰과 ESP32의 MQTT 프로토콜을 통해 메시지를 주고받을 수 있다.</li>
+                                        <div class="image-grid">
+                                            <img src="mqtt1-1.jpg" alt="Screenshot 1" style="width: 200px; height: auto;">
+                                            <img src="mqtt1-2.PNG" alt="Screenshot 2" style="width: 350px; height: auto;">
+                                            <img src="mqtt1-3.PNG" alt="Screenshot 3" style="width: 300px; height: auto;">
+                                            <img src="mqtt1-4.jpg" alt="Screenshot 4" style="width: 200px; height: auto;">
+                                        </div>
+                                    </ul>
+
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        async function loadCode(file, elementId) {
+            const response = await fetch(file);
+            const code = await response.text();
+            document.getElementById(elementId).textContent = code;
+        }
+
+        loadCode('mqtt1.ino', 'mqtt1-code');
+    </script>
+</body>
+</html>

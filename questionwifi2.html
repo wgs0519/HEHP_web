@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIFI 2 문제 - HEHP</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .code-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .description-box {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>WIFI 2 문제</h1>
+        <section>
+            <div class="code-display" id="wifi2-code"></div>
+
+            <div class="description-box">
+                <h4>코드 설명:</h4>
+                <p>이 코드는 ESP32를 이용해 Wi-Fi 네트워크를 통해 두 장치 간에 암호 추측 및 검증을 시도하는 공격 시나리오를 구현한 예제입니다.</p>
+                <ul>
+                    <li><strong>WiFi.softAP(ap_ssid, ap_password): </strong> ESP32를 액세스 포인트 모드로 설정하여, ap_ssid와 ap_password를 사용해 핫스팟을 생성한다.</li>
+                                        <li><strong>server.on("/", handleRoot): </strong> HTTP 요청이 루트("/") 경로로 들어올 때 handleRoot 함수를 호출하도록 설정한다.</li>
+                                        <li><strong>Serial.println(WiFi.softAPIP()):</strong> 생성된 핫스팟의 IP 주소를 시리얼 모니터에 출력한다.</li>
+                                        <li><strong>String html = "<html><body>...부터 시작되는 코드 부분:</strong> 간단한 HTML 페이지를 생성하고 이 페이지에는 비밀번호를 입력할 수 있는 폼이 있으며, 현재 시도하고 있는 비밀번호(currentGuess)를 표시한다.</li>
+                                        <li><strong>server.send(200, "text/html", html):</strong> 생성된 HTML 페이지를 클라이언트에게 200 OK 상태 코드와 함께 응답으로 보낸다</li>
+                                            응답이 있는 경우, 올바르게 맞춘 자릿수를 확인하고 이를 웹 페이지로 응답합니다. 또한, 시리얼 모니터에 현재 시도한 비밀번호와 맞춘 자릿수를 출력한다.
+                                            만약 4자릿수 모두 맞춘 경우, 시리얼 모니터에 "Password found"와 함께 비밀번호를 출력한다.
+                                            응답이 없을 경우, "No response from victim device"라는 메시지를 웹 페이지로 응답한다.
+                                            </li>
+                                        <li><strong>if (MySerial.available()): </strong> 서버로부터 응답을 받아 이를 시리얼 모니터에 출력한다.</li>
+                                        <li><strong>MySerial.write(guessStr, 4):</strong> 변환된 비밀번호를 피해자 장치로 시리얼 통신을 통해 전송한다.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        async function loadCode(file, elementId) {
+            const response = await fetch(file);
+            const code = await response.text();
+            document.getElementById(elementId).textContent = code;
+        }
+
+        loadCode('wifi2.ino', 'wifi2-code');
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제 - HEHP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        /* 상위 카테고리 카드 스타일 */
+        .card {
+            background-color: #87CEEB;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 300px;
+            max-width: 300px;
+            height: 200px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 30px;
+            margin: 0;
+            line-height: 200px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 하위 문제 카드 스타일 */
+        .subcategory-card {
+            background-color: #87CEEB;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1 1 200px;  /* 카드 크기를 작게 설정 */
+            max-width: 200px; /* 최대 너비를 더 작게 설정 */
+            height: 150px;    /* 높이를 더 작게 설정 */
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subcategory-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .subcategory-card h3 {
+            font-size: 20px;  /* 글씨 크기를 작게 설정 */
+            margin: 0;
+            line-height: 150px; /* 카드 높이에 맞춰서 텍스트 중앙 정렬 */
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hide all category cards initially */
+        #ble-cards, #mqtt-cards, #espnow-cards, #wifi-cards, #touchsensor-cards, #adc-cards {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+                <li><a href="background.html">배경지식</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <!-- 카테고리 카드 -->
+            <div class="card-container">
+                <div class="card" onclick="showCategory('ble-cards')">
+                    <h3>BLE</h3>
+                </div>
+                <div class="card" onclick="showCategory('mqtt-cards')">
+                    <h3>MQTT</h3>
+                </div>
+                <div class="card" onclick="showCategory('touchsensor-cards')">
+                    <h3>TOUCHSENSOR</h3>
+                </div>
+                <div class="card" onclick="showCategory('espnow-cards')">
+                    <h3>ESPNOW</h3>
+                </div>
+                <div class="card" onclick="showCategory('wifi-cards')">
+                    <h3>WIFI</h3>
+                </div>
+                <div class="card" onclick="showCategory('adc-cards')">
+                    <h3>ADC(DAC)</h3>
+                </div>
+            </div>
+
+            <!-- BLE Cards -->
+            <div id="ble-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='questionble1.html'">
+                    <h3>BLE 1</h3>  
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionble2.html'">
+                    <h3>BLE 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionble3.html'">
+                    <h3>BLE 3</h3>
+                </div>
+            </div>
+
+            <!-- MQTT Cards -->
+            <div id="mqtt-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='questionmqtt1.html'">
+                    <h3>MQTT 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionmqtt2.html'">
+                    <h3>MQTT 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionmqtt3.html'">
+                    <h3>MQTT 3</h3>
+                </div>
+            </div>
+
+            <!-- TouchSensor Cards -->
+            <div id="touchsensor-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='questiontouchsensor1.html'">
+                    <h3>TOUCHSENSOR 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questiontouchsensor2.html'">
+                    <h3>TOUCHSENSOR 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questiontouchsensor3.html'">
+                    <h3>TOUCHSENSOR 3</h3>
+                </div>
+            </div>
+
+            <!-- ESPNOW Cards -->
+            <div id="espnow-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='questionespnow1.html'">
+                    <h3>ESPNOW 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionespnow2.html'">
+                    <h3>ESPNOW 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionespnow3.html'">
+                    <h3>ESPNOW 3</h3>
+                </div>
+            </div>
+
+            <!-- WIFI Cards -->
+            <div id="wifi-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='questionwifi1.html'">
+                    <h3>WIFI 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionwifi2.html'">
+                    <h3>WIFI 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionwifi3.html'">
+                    <h3>WIFI 3</h3>
+                </div>
+            </div>
+
+            <!-- ADC(DAC) Cards -->
+            <div id="adc-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)1.html'">
+                    <h3>ADC(DAC) 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)2.html'">
+                    <h3>ADC(DAC) 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)3.html'">
+                    <h3>ADC(DAC) 3</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)4.html'">
+                    <h3>ADC(DAC) 4</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        function showCategory(categoryId) {
+            // 모든 카테고리의 문제 목록을 숨기기
+            var categories = ['ble-cards', 'mqtt-cards', 'touchsensor-cards', 'espnow-cards', 'wifi-cards', 'adc-cards'];
+            categories.forEach(function(id) {
+                if (id !== categoryId) {
+                    document.getElementById(id).style.display = 'none';
+                }
+            });
+
+            // 선택된 카테고리의 문제 목록을 보이기
+            var selectedCategory = document.getElementById(categoryId);
+            if (selectedCategory.style.display === 'flex') {
+                selectedCategory.style.display = 'none';
+            } else {
+                selectedCategory.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>

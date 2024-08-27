@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>도움말 - HEHP</title>
+    <title>MQTT 배경지식 - HEHP</title>
     <style>
         /* Global Styles */
         body {
@@ -15,7 +15,6 @@
             color: #333;
         }
 
-        /* Header Styles */
         header {
             background-color: #007BFF;
             color: #fff;
@@ -55,35 +54,30 @@
             text-decoration: underline;
         }
 
-        /* Main Content Styles */
         main {
             padding: 20px;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
         }
 
-        main h2 {
-            font-size: 30px; /* 제목 크기 증가 */
-            margin-bottom: 20px;
-            color: #007BFF;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-        }
-
-        .image-grid img {
-            margin-bottom: 20px;
-            max-width: 95%; /* 이미지 크기 살짝 키움 */
-            height: auto;
+        .info-section {
+            background-color: #f4f4f4;
             border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .image-grid li {
+        .info-section h4 {
+            margin-bottom: 10px;
             font-size: 18px;
+        }
+
+        .info-text {
+            font-size: 14px;
             margin-bottom: 10px;
         }
 
-        /* Footer Styles */
         footer {
             background-color: #007BFF;
             color: #fff;
@@ -111,32 +105,15 @@
         </nav>
     </header>
     <main>
-        <h2>아두이노 IDE를 사용하는 방법</h2>
-        <section>
-            <div id="arduino-guide">
-                <div class="image-grid">
-                    <p><img src="help1-1.png" alt="Screenshot 1">
-                       <img src="help1-2.png" alt="Screenshot 2"></p>
-                    <ul>
-                        <li><strong>① 환경 설정 영역: 자신에게 맞는 설정 및 새 파일을 생성하거나 실행 중인 파일의 저장을 위한 공간이다.</strong></li>
-                        <li><strong>③,⑤ 로그 영역:</strong> 시리얼 모니터로, 실제 작성한 프로그램을 컴파일한 후 에러 메시지 혹은 컴파일 관련 메시지를 보여주는 공간입니다.</li>
-                        <li><strong>④ 코드 영역:</strong> 실제 코드를 작성하기 위한 공간입니다.</li>
-                    </ul>
-                    <p><img src="help1-3.png" alt="Screenshot 3"></p>
-                    <ul>
-                        <li><strong>툴 -> 보드:</strong> ESP32를 연결 후 사용하는 보드의 종류를 지정합니다.</li>
-                    </ul>
-                    <p><img src="help1-4.png" alt="Screenshot 4"></p>
-                    <ul>
-                        <li><strong>툴 -> 포트:</strong> 보드의 종류를 지정한 후 사용하는 USB 포트를 지정합니다.</li>
-                    </ul>
-                    <p><img src="help1-5.png" alt="Screenshot 5"></p>
-                    <ul>
-                        <li><strong>스케치 -> 라이브러리 관리:</strong> ESP32의 종류에 맞는 라이브러리를 찾아 설치합니다.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+        <section class="info-section">
+            <p class="info-text">1. ESP32는 블루투스 classic모듈이 내장되어있으므로 특별히 장치를 하지 않아도 스마트폰과 블루투스 통신이 가능하다!</p>
+            <p class="info-text">2. 블루투스 통신은 마스터와 슬레이브로 설정을 해야 상호간의 양방향 통신이 가능하다!</p>
+            <p class="info-text">3. 이때 주변 장치를 검색해서 연결을 하는쪽을 마스터, 연결을 당하는 쪽을 슬레이브라고 한다!</p>
+            <p class="info-text">4. ESP32는 슬레이브가되고 스마트폰은 마스터가 되어야 일단 통신이 가능하다.</p>
+            <p class="info-text">5. ESP32에서 제공하는 마스터예제에서는 MAC주소로 접속하거나 디바이스명으로 접속하거나 디바이스명과 비밀번호로 접속하는 방법을 제시한다!</p>
+            <p class="info-text">6. 무선통신에서 바이너리로 데이터를 주고받을때 가장 활용하기 좋은 기술은 구조체를 주고받는것이다!</p>
+            <p class="info-text">7. 로라, nRF24L01, 블루투스, CAN통신, RS485통신 등등 모든 통신은 아두이노에서 사용하는 함수가 동일하기 때문에 익혀두면 나중에 또 활용가능하다.</p>
+            <p class="info-text">8. 우리가 버튼을 한번 누른다라고 해서 누르면 한번 눌러진것처럼 보이지만 실제로는 20~30번 눌러진것으로 인식된다(채터링현상)</p>
     </main>
     <footer>
         <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>

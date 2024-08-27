@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIFI 1 문제 - HEHP</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .code-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .description-box {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>WIFI 1 문제</h1>
+        <section>
+            <div class="code-display" id="wifi1-code"></div>
+
+            <div class="description-box">
+                <h4>코드 설명:</h4>
+                <p>이 코드는 ESP32를 사용하여 Wi-Fi 액세스 포인트를 생성하고, 클라이언트가 접속하면 캡티브 포털 페이지를 표시하는 예제입니다.</p>
+                <ul>
+                    <li><strong>WiFi.softAP(ssid, password):</strong> ESP32를 액세스 포인트(AP) 모드로 설정하여 지정된 SSID와 비밀번호를 사용해 네트워크를 생성한다.</li>
+                                        <li><strong>WiFi.softAPConfig(apIP, apIP, IPAddress(255, 255, 255, 0)):</strong> AP 모드에서 ESP32의 IP 주소와 서브넷 마스크를 설정합니다. 이 코드에서는 IP 주소를 192.168.4.1로 설정한다.</li>
+                                        <li><strong>dnsServer.start(DNS_PORT, "*", apIP):</strong> DNS 서버를 시작하여 모든 도메인 이름을 AP의 IP 주소로 리다이렉트합니다. 클라이언트가 어떤 웹사이트를 요청하더라도 ESP32의 IP로 연결된다.</li>
+                                        <li><strong>webServer.on("/", handleRoot):</strong> 웹 서버에서 기본 경로("/")로 들어오는 요청을 처리하기 위해 handleRoot() 함수를 등록합니다. 이 함수는 캡티브 포털 페이지를 제공한다.</li>
+                                        <li><strong>webServer.on("/submit", HTTP_POST, handleSubmit):</strong> 클라이언트가 폼을 제출하면 해당 데이터를 처리하기 위해 handleSubmit() 함수를 호출합니다. 이메일과 비밀번호를 수집하여 시리얼 모니터에 출력한다.</li>
+                                        <li><strong>webServer.onNotFound(handleNotFound):</strong> 클라이언트가 잘못된 URL을 요청할 때 모든 요청을 캡티브 포털 페이지로 리다이렉트하기 위해 handleNotFound() 함수를 호출한다.</li>
+                                        <li><strong>dnsServer.processNextRequest():</strong> DNS 서버가 들어오는 요청을 처리하고, 클라이언트를 올바른 웹 페이지로 리다이렉트한다..</li>
+                                        <li><strong>webServer.handleClient():</strong> 웹 서버가 클라이언트의 HTTP 요청을 처리하고 적절한 응답을 보냅니다.</li>
+                                        <li>이 코드 전체는 "캡티브 포털"을 구현하여 사용자가 지정된 네트워크에 연결될 때마다 특정 웹 페이지를 표시합니다. 이 웹 페이지에서 사용자는 이메일 주소와 비밀번호를 입력할 수 있으며, 입력된 정보는 시리얼 모니터에 출력된다.</li>
+                                        <li>이를 통해 임의의 사용자의 정보를 강탈하는 것이 가능하다.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        async function loadCode(file, elementId) {
+            const response = await fetch(file);
+            const code = await response.text();
+            document.getElementById(elementId).textContent = code;
+        }
+
+        loadCode('wifi1.ino', 'wifi1-code');
+    </script>
+</body>
+</html>

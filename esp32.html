@@ -70,9 +70,14 @@
             padding-bottom: 10px;
         }
 
-        .image-grid img {
+        .image-grid {
+            display: flex;
+            gap: 20px; /* 이미지 간격 */
             margin-bottom: 20px;
-            max-width: 95%; /* 이미지 크기 살짝 키움 */
+        }
+
+        .image-grid img {
+            max-width: 50%; /* 이미지 너비 조정 */
             height: auto;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -111,30 +116,21 @@
         </nav>
     </header>
     <main>
-        <h2>아두이노 IDE를 사용하는 방법</h2>
+        <h2>ESP32란 무엇인가</h2>
         <section>
             <div id="arduino-guide">
                 <div class="image-grid">
-                    <p><img src="help1-1.png" alt="Screenshot 1">
-                       <img src="help1-2.png" alt="Screenshot 2"></p>
-                    <ul>
-                        <li><strong>① 환경 설정 영역: 자신에게 맞는 설정 및 새 파일을 생성하거나 실행 중인 파일의 저장을 위한 공간이다.</strong></li>
-                        <li><strong>③,⑤ 로그 영역:</strong> 시리얼 모니터로, 실제 작성한 프로그램을 컴파일한 후 에러 메시지 혹은 컴파일 관련 메시지를 보여주는 공간입니다.</li>
-                        <li><strong>④ 코드 영역:</strong> 실제 코드를 작성하기 위한 공간입니다.</li>
-                    </ul>
-                    <p><img src="help1-3.png" alt="Screenshot 3"></p>
-                    <ul>
-                        <li><strong>툴 -> 보드:</strong> ESP32를 연결 후 사용하는 보드의 종류를 지정합니다.</li>
-                    </ul>
-                    <p><img src="help1-4.png" alt="Screenshot 4"></p>
-                    <ul>
-                        <li><strong>툴 -> 포트:</strong> 보드의 종류를 지정한 후 사용하는 USB 포트를 지정합니다.</li>
-                    </ul>
-                    <p><img src="help1-5.png" alt="Screenshot 5"></p>
-                    <ul>
-                        <li><strong>스케치 -> 라이브러리 관리:</strong> ESP32의 종류에 맞는 라이브러리를 찾아 설치합니다.</li>
-                    </ul>
+                    <img src="ESP32 GPIO.png" alt="Screenshot 1">
+                    <img src="ESP32overview.png" alt="Screenshot 2">
                 </div>
+                <ul>
+                    <li>ESP32는 작고 강력한 마이크로컨트롤러로, Wi-Fi와 블루투스를 동시에 사용할 수 있는 것이 가장 큰 장점입니다.</li>
+                    <li> 쉽게 말해, 이 칩 하나로 인터넷에 연결되거나 다른 기기와 무선으로 통신하는 장치를 만들 수 있습니다.</li>
+                    <li>크기는 작지만, 다양한 센서나 버튼을 연결해서 여러 가지 작업을 할 수 있습니다.</li>
+                    <li> 전자제품을 직접 만들고 제어하는 데 필요한 기능들이 모두 이 작은 칩 안에 들어있기 때문에, 많은 개발자들이 이 칩을 사용해 IoT(사물인터넷) 제품을 만듭니다.</li>
+                    <li> 프로그래밍도 비교적 쉬운 편이라, Arduino IDE 같은 도구를 이용해 간단히 코드를 작성하고 칩에 업로드할 수 있습니다.</li> 
+                    <li> 비전공자도 쉽게 배우고 사용할 수 있는 플랫폼이 존재한다면, 취미로 전자기기를 만드는 사람들부터 전문가들까지 다양한 사람들이 참고하여 개발에 도움을 받을 수 있습니다.</li>
+                </ul>
             </div>
         </section>
     </main>

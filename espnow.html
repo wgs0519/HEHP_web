@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT 배경지식 - HEHP</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .info-section {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+                <li><a href="background.html">배경지식</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="info-section">
+            <p class="info-text">1. ESPNOW는 WiFi공유기에 연결하는 것과 똑같은 개념으로 보드와 보드사이에 메시지를 주고받을 수 있는 무선통신 기술이다!</p>
+            <p class="info-text">2. WiFi칩이 들어간 모든 IoT보드는 각자 고유의 주소를 가지고 있고 그것을 MAC어드레스라고 부른다!(6개의 byte로 구성이 되어있다)</p>
+            <p class="info-text">3. 확률적으로 모든 보드는 서로다른 MAC주소를 가지고있다!</p>
+            <p class="info-text">4. ESPNOW에서 peer를 등록한다는 것의 의미는 내가 누구에게 전송할 것인가?를 의미한다! 다른 누군가가 나한테 보낼때는 보내는 녀석이 나의 주소를 peer로 등록해야한다!</p>
+            <p class="info-text">5. ESPNOW는 WiFi하고 통신방식이 동일하기 때문에 채널을 동일하게 설정해야 통신이가능하다!</p>
+            <p class="info-text">6. 송신콜백함수(OnDataSent) 나의 ESP32보드가 데이터를 전송하고 데이터가 성공적으로 다 송신이 되었을때 호출되는 함수이다! -> 상대방보드가 성공적으로 데이터를 수신했는지 아닌지를 확인할 수 있음!</p>
+            <p class="info-text">7. 수신콜백함수(OnDataRecv) 다른 ESP32보드가 나의 보드에 데이터를 전송했을때 호출되는 함수이다!</p>
+            <p class="info-text">8. ESPNOW에서 메시지를 전송하는 함수가 TCP나 UDP처럼 byte array를 전송하는 형식이기 때문에 어렵다고 느낄 수 있다!</p>
+            <p class="info-text">9. ESPNOW를 포함한 모든 통신의 기본단위는 1byte이다!</p>
+            <p class="info-text">10. 보내는쪽에서 1byte를 전송하면 받는쪽에서 1byte를 수신하면 된다!</p>
+            <p class="info-text">11. 보내는쪽에서 uint16_t를 2byte를 쪼개서 전송하면 수신하는쪽에서는 2byte를 받은다음에 합치는 작업을 해야한다!!</p>
+            <p class="info-text">12. 배열의 이름은 배열의 첫번째값의 주소와 같으나 구조체의 이름은 그런거와 전혀관련없다!</p>
+            <p class="info-text">13. ESPNOW로 데이터를 완벽하게 전송하기전에 새로운데이터를 전송시도하면 문제가 생긴다!</p>
+            <p class="info-text">14. 데이터를 고속으로 전송할때 송신콜백함수가 호출되어야 그다음 데이터를 전송할 수 있다!</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+</body>
+</html>

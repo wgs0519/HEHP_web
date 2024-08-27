@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESPNOW 1 문제 - HEHP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        header .subtext {
+            font-size: 14px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .code-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .description-box {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .description-box ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        footer {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span style="color: #FFDD57;">H</span>E<span style="color: #FFDD57;">H</span>P
+            <span class="subtext">하드웨어 임베디드 해킹 플랫폼</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="update.html">펌웨어 업데이트</a></li>
+                <li><a href="help.html">도움말</a></li>
+                <li><a href="freeboard.html">자유게시판</a></li>
+                <li><a href="question.html">문제</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>ESPNOW 1 문제</h1>
+        <section>
+            <div class="code-display" id="espnow1-code"></div>
+            <div class="description-box">
+                <h4>코드 설명:</h4>
+                <p>이 코드는 ESPNOW라는 ESP32에 내장된 통신 프로토콜을 이용해 두 개의 ESP32 보드 간에 데이터를 송수신하는 예제입니다.</p>
+                <ul>
+                    <li><strong>MAC 주소 정의:</strong> MAC 주소는 각 ESP32 보드의 고유 식별자로, 이 주소를 통해 데이터를 주고받는다.</li>
+                    <li><strong>상대방 보드의 정보 설정 및 등록:</strong> 상대방의 MAC 주소, 채널, 암호화 설정을 지정하고, 그 정보를 ESP-NOW 네트워크에 등록한다. 이 설정을 통해 두 보드 간에 데이터를 주고받을 수 있다.</li>
+                    <li><strong>콜백 함수 등록:</strong> 송신과 수신이 완료되었을 때 호출될 콜백 함수(OnDataSent, OnDataRecv)를 등록한다.</li>
+                    <li><strong>송신 콜백 함수:</strong> 이 함수는 데이터가 성공적으로 송신되었는지 확인하고, 성공 여부에 따라 메시지를 출력한다.</li>
+                    <li><strong>수신 콜백 함수:</strong> 이 함수는 데이터를 수신했을 때 호출된다. 수신된 데이터는 문자열로 변환되어 시리얼 모니터에 출력된다.</li>
+                    <li>보드 A와 보드 B가 서로의 MAC 주소를 알고 있으며, 이를 통해 2초마다 메시지를 주고받는다.</li>
+                    <li>보드 A와 보드 B 모두 동일한 코드 구조를 가지며, 상대방의 MAC 주소만 다르게 설정되어 있다. </li>
+                    <li>송신과 수신이 완료되면 각각의 콜백 함수가 호출되어 결과를 시리얼 모니터에 출력한다.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        async function loadCode(file, elementId) {
+            const response = await fetch(file);
+            const code = await response.text();
+            document.getElementById(elementId).textContent = code;
+        }
+
+        loadCode('espnow1.ino', 'espnow1-code');
+    </script>
+</body>
+</html>

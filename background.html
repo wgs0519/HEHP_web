@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>홈 - HEHP</title>
+    <title>배경지식 - HEHP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
     <style>
         /* Global Styles */
         body {
@@ -60,51 +61,46 @@
             padding: 20px;
             max-width: 1200px;
             margin: auto;
-            display: flex;
-            gap: 20px; /* 간격 조정 */
-            justify-content: space-between;
         }
 
-        section {
-            flex: 1;
-        }
-
-        section h2 {
-            font-size: 24px;
+        main h1 {
+            font-size: 32px;
             margin-bottom: 20px;
-            color: #007BFF;
             border-bottom: 2px solid #ddd;
             padding-bottom: 10px;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        main section h2 {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #0056b3;
         }
 
-        /* Card Container Styles */
         .card-container {
             display: flex;
-            flex-wrap: wrap;
+            justify-content: space-between; /* Adjust space between cards */
             gap: 20px;
-            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Allow cards to wrap to the next line */
+        }
+
+        .card-container > .card {
+            flex: 1 1 calc(33.33% - 40px); /* Adjust card size to fit two rows */
+            margin: 10px; /* Add some space around each card */
         }
 
         .card {
             background-color: #87CEEB;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            width: calc(50% - 10px); /* 너비 설정 */
-            height: 150px; /* 높이 조정 */
+            overflow: hidden;
+            width: 300px;
+            height: 200px;
             text-align: center;
             transition: transform 0.3s;
             position: relative;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .card:hover {
@@ -135,11 +131,18 @@
         }
 
         .card h3 {
-            font-size: 20px;
+            font-size: 30px;
             margin: 0;
+            line-height: 200px; /* Vertically center the text */
             color: #fff;
             position: relative;
             z-index: 1;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #333;
+            margin-top: 10px;
         }
 
         /* Footer Styles */
@@ -171,29 +174,23 @@
     </header>
     <main>
         <section>
-            <h2>프로젝트 소개</h2>
-            <img src="projectoverview.jpg" alt="Project Overview">
-        </section>
-        <section>
-            <h2>가이드라인</h2>
-            <div class="card-container">
-                <div class="card" onclick="location.href='esp32.html'">
-                    <h3>ESP32</h3>
-                </div>
-                <div class="card" onclick="location.href='task1.html'">
-                    <h3>Task 1</h3>
-                </div>
-                <div class="card" onclick="location.href='task2.html'">
-                    <h3>Task 2</h3>
-                </div>
-                <div class="card" onclick="location.href='task3.html'">
-                    <h3>Task 3</h3>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
-    </footer>
+           <!-- Knowledge Category Cards -->
+           <div class="card-container">
+               <div class="card" onclick="location.href='mqtt.html'" style="display: flex; align-items: center; justify-content: center;">
+                   <h3 style="font-size: 30px; margin: 0;">MQTT 관련지식</h3>
+               </div>
+               <div class="card" onclick="location.href='bluetooth.html'" style="display: flex; align-items: center; justify-content: center;">
+                   <h3 style="font-size: 30px; margin: 0;">BLE 관련지식</h3>
+               </div>
+               <div class="card" onclick="location.href='espnow.html'" style="display: flex; align-items: center; justify-content: center;">
+                   <h3 style="font-size: 30px; margin: 0;">ESPNOW 관련지식</h3>
+               </div>
+           </div>
+        
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+</footer>
 </body>
 </html>
