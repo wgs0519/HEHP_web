@@ -104,9 +104,9 @@
             background-color: #87CEEB;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            flex: 1 1 200px;
-            max-width: 200px;
-            height: 150px;
+            flex: 1 1 200px;  /* 카드 크기를 작게 설정 */
+            max-width: 200px; /* 최대 너비를 더 작게 설정 */
+            height: 150px;    /* 높이를 더 작게 설정 */
             text-align: center;
             transition: transform 0.3s;
             position: relative;
@@ -121,15 +121,15 @@
         }
 
         .subcategory-card h3 {
-            font-size: 20px;
+            font-size: 20px;  /* 글씨 크기를 작게 설정 */
             margin: 0;
-            line-height: 150px;
+            line-height: 150px; /* 카드 높이에 맞춰서 텍스트 중앙 정렬 */
             color: #fff;
             position: relative;
             z-index: 1;
         }
 
-        /* 처음 로드 시 모든 하위 문제를 숨김 */
+        /* Hide all category cards initially */
         #ble-cards, #mqtt-cards, #espnow-cards, #wifi-cards, #touchsensor-cards, #adc-cards {
             display: none;
         }
@@ -278,12 +278,18 @@
             // 모든 카테고리의 문제 목록을 숨기기
             var categories = ['ble-cards', 'mqtt-cards', 'touchsensor-cards', 'espnow-cards', 'wifi-cards', 'adc-cards'];
             categories.forEach(function(id) {
-                document.getElementById(id).style.display = 'none';
+                if (id !== categoryId) {
+                    document.getElementById(id).style.display = 'none';
+                }
             });
 
             // 선택된 카테고리의 문제 목록을 보이기
             var selectedCategory = document.getElementById(categoryId);
-            selectedCategory.style.display = 'flex';
+            if (selectedCategory.style.display === 'flex') {
+                selectedCategory.style.display = 'none';
+            } else {
+                selectedCategory.style.display = 'flex';
+            }
         }
     </script>
 </body>
