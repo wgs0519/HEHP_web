@@ -245,4 +245,50 @@
                     <h3>WIFI 1</h3>
                 </div>
                 <div class="subcategory-card" onclick="location.href='questionwifi2.html'">
-                    <h
+                    <h3>WIFI 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='questionwifi3.html'">
+                    <h3>WIFI 3</h3>
+                </div>
+            </div>
+
+            <!-- ADC(DAC) Cards -->
+            <div id="adc-cards" class="card-container">
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)1.html'">
+                    <h3>ADC(DAC) 1</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)2.html'">
+                    <h3>ADC(DAC) 2</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)3.html'">
+                    <h3>ADC(DAC) 3</h3>
+                </div>
+                <div class="subcategory-card" onclick="location.href='ADC(DAC)4.html'">
+                    <h3>ADC(DAC) 4</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 하드웨어 임베디드 해킹 플랫폼</p>
+    </footer>
+
+    <script>
+        function showCategory(categoryId) {
+            // 모든 카테고리의 문제 목록을 숨기기
+            var categories = ['ble-cards', 'mqtt-cards', 'touchsensor-cards', 'espnow-cards', 'wifi-cards', 'adc-cards'];
+            categories.forEach(function(id) {
+                document.getElementById(id).style.display = 'none';
+            });
+
+            // 선택된 카테고리의 문제 목록을 보이기
+            var selectedCategory = document.getElementById(categoryId);
+            if (selectedCategory.style.display === 'flex') {
+                selectedCategory.style.display = 'none';
+            } else {
+                selectedCategory.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
