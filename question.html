@@ -104,9 +104,9 @@
             background-color: #87CEEB;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            flex: 1 1 200px;  /* 카드 크기를 작게 설정 */
-            max-width: 200px; /* 최대 너비를 더 작게 설정 */
-            height: 150px;    /* 높이를 더 작게 설정 */
+            flex: 1 1 200px;
+            max-width: 200px;
+            height: 150px;
             text-align: center;
             transition: transform 0.3s;
             position: relative;
@@ -121,9 +121,9 @@
         }
 
         .subcategory-card h3 {
-            font-size: 20px;  /* 글씨 크기를 작게 설정 */
+            font-size: 20px;
             margin: 0;
-            line-height: 150px; /* 카드 높이에 맞춰서 텍스트 중앙 정렬 */
+            line-height: 150px;
             color: #fff;
             position: relative;
             z-index: 1;
@@ -283,11 +283,7 @@
 
             // 선택된 카테고리의 문제 목록을 보이기
             var selectedCategory = document.getElementById(categoryId);
-            if (selectedCategory.style.display === 'flex') {
-                selectedCategory.style.display = 'none';
-            } else {
-                selectedCategory.style.display = 'flex';
-            }
+            selectedCategory.style.display = 'flex';
         }
     </script>
 </body>
